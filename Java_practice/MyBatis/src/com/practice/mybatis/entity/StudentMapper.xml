@@ -8,9 +8,13 @@
 		parameterType="java.lang.Integer"
 		resultType="com.situ.mybatis.pojo.Student"
 	-->
-    <select id="selectById"  parameterType="Integer" resultType="com.practice.mybatis.pojo.Student">
+    <select id="selectById"  parameterType="Integer" resultType="Student">
         select id,name,age,gender,banji_id from student where id=#{id}
     </select>
 	
+    <select id="selectAll" resultType="Student">
+        select id,name,age,gender,banji_id from student
+    </select>
+    
 </mapper>
   

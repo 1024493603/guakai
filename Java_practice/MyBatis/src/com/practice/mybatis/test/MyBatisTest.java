@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class MyBatisTest {
 
@@ -33,5 +34,14 @@ public class MyBatisTest {
         SqlSession sqlSession = MyBatisUtil.getSqlSession();
         Student student = sqlSession.selectOne("student.selectById", 4);
         System.out.println(student);
+    }
+
+    @Test
+    public void selectAll() {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        List<Student> students = sqlSession.selectList("student.selectAll");
+        for (Student student : students) {
+            System.out.println(student);
+        }
     }
 }
