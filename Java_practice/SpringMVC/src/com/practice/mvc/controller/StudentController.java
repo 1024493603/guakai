@@ -4,6 +4,9 @@ import com.practice.mvc.pojo.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -37,9 +40,13 @@ public class StudentController {
         return modelAndView;
     }
 
-    @RequestMapping("/add")
+    // 默认情况下既支持Get请求也支持Post请求
+    //方法不一样时会报405错误
+    // @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.GET})
+    // @RequestMapping(value = "/add", method = {RequestMethod.POST})
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Student student, Model model) {
-        System.out.println("StudentController.add2");
+        System.out.println("StudentController.add");
         System.out.println(student);
 
         model.addAttribute("student", student);
@@ -72,5 +79,42 @@ public class StudentController {
         System.out.println("id:" + id);
 
         return "redirect:/student/selectAll.action";    //重定向到另一个函数
+    }
+
+    @RequestMapping("/select")
+    @ResponseBody //将返回的对象转换为json
+    public List<Student> select(Model model) {
+        System.out.println("StudentController.select");
+        List<Student> list = new ArrayList<>();
+        list.add(new Student(1, "张三", 23, "男"));
+        list.add(new Student(2, "王五", 23, "男"));
+        list.add(new Student(3, "赵四", 23, "男"));
+
+        return list;
+    }
+
+    @RequestMapping("/selectById")
+    @ResponseBody
+    public Student selectById() {
+        System.out.println("StudentController.selectById");
+        Student student = new Student(1, "李四", 24, "男");
+
+        return student;
+    }
+
+    @RequestMapping("/selectByPage")
+    @ResponseBody
+    public void selectById(@RequestParam(value = "pageN", defaultValue = "1") Integer pageNo,//改名为pageN  原先pageNo变为新参数
+                           @RequestParam(defaultValue = "5") Integer pageSize,//默认值为5
+                           @RequestParam(required = true) Integer totalPage) {//该参数设定为必须传输的参数，否则为400错误
+        /*if (pageNo == null) {
+            pageNo = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 5;
+        }*/
+        System.out.println("pageNo: " + pageNo);
+        System.out.println("pageSize: " + pageSize);
+        System.out.println("totalPage: " + totalPage);
     }
 }
