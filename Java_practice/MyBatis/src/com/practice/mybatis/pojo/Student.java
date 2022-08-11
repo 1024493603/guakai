@@ -5,15 +5,20 @@ public class Student {
     private String name;
     private Integer age;
     private String gender;
+    private Integer banjiId;
 
     public Student() {
     }
 
-    public Student(Integer id, String name, Integer age, String gender) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", banjiId=" + banjiId +
+                '}';
     }
 
     public Integer getId() {
@@ -48,13 +53,19 @@ public class Student {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
+    public Integer getBanjiId() {
+        return banjiId;
+    }
+
+    public void setBanjiId(Integer banjiId) {
+        this.banjiId = banjiId;
+    }
+
+    public Student(Integer id, String name, Integer age, String gender, Integer banjiId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.banjiId = banjiId;
     }
 }
