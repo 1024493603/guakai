@@ -4,16 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="student">
+    <sql id="studentColumns">
+        id,name,age,gender,banji_id
+    </sql>
+
     <!-- public Student selectById(Integer id) {}
 		parameterType="java.lang.Integer"
 		resultType="com.situ.mybatis.pojo.Student"
 	-->
     <select id="selectById"  parameterType="Integer" resultType="Student">
-        select id,name,age,gender,banji_id from student where id=#{id}
+        select <include refid="studentColumns"/> from student where id=#{id}
     </select>
 	
     <select id="selectAll" resultType="Student">
-        select id,name,age,gender,banji_id from student
+        select <include refid="studentColumns"/> from student
     </select>
 
     <!-- 对于更新类的操作返回的是影响的行数，但是resultType不需要写
@@ -29,5 +33,33 @@
         values(#{name},#{age},#{gender},#{banjiId})
     </insert>
 
+    <update id="update" parameterType="Student">
+        update student
+        set name=#{name},age=#{age},gender=#{gender},banji_id=#{banjiId}
+        where id=#{id}
+    </update>
+    
+    <select id="selectByPage" parameterType="map" resultType="Student">
+        select <include refid="studentColumns"/> from student limit #{offset},#{pageSize}
+    </select>
+
+    <select id="selectTotalCount" resultType="Integer">
+        SELECT count(*) FROM student
+    </select>
+
+    <!--如果查询出来的列名和实体类的属性不一致，通过定义一个resultMap对列名和实体类属性名做一个映射关系。-->
+    <select id="selectAll" resultMap="studentMap">
+        select <include refid="studentColumns"/> from student
+    </select>
+
+    <!--数据库列名映射到类实例中的属性名-->
+    <!--名字一样的可以不写，但建议全写-->
+    <resultMap id="studentMap" type="student">
+        <id column="id" property="id"/>     <!--主键用id-->
+        <result column="student_name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <result column="banji_id" property="banjiId"/>
+    </resultMap>
 </mapper>
   

@@ -10,7 +10,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyBatisTest {
 
@@ -64,10 +66,44 @@ public class MyBatisTest {
     public void add() {
         SqlSession sqlSession = MyBatisUtil.getSqlSession();
         Student student = new Student("王五",24,"男",1);
-        int count = sqlSession.update("student.add", student);
+        int count = sqlSession.insert("student.add", student);
         System.out.println(count);
         //需要手动提交
         sqlSession.commit();
         sqlSession.close();
+    }
+
+    @Test
+    public void update() {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        Student student = new Student("王",2,"男",1);
+        student.setId(16);
+        int count = sqlSession.update("student.update", student);
+        System.out.println(count);
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testSelectByPage() throws IOException {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        int pageNo = 2;
+        int pageSize = 3;
+        int offset = (pageNo - 1) * pageSize;
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("offset", offset);
+        map.put("pageSize", pageSize);
+        List<Student> list = sqlSession.selectList("student.selectByPage", map);
+        for (Student student : list) {
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void testSelectTotalCount() throws IOException {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        int count = sqlSession.selectOne("student.selectTotalCount");
+        System.out.println("count: " + count);
     }
 }
