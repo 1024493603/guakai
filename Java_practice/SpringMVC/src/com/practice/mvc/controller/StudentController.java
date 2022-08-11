@@ -36,7 +36,7 @@ public class StudentController {
         // Model:数据 View：界面
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("student", student);
-        modelAndView.setViewName("/student_info.jsp");
+        modelAndView.setViewName("student_info");
         return modelAndView;
     }
 
@@ -51,7 +51,7 @@ public class StudentController {
 
         model.addAttribute("student", student);
 
-        return "/student_info.jsp";
+        return "student_info";
     }
 
     @RequestMapping("/selectAll")
@@ -62,7 +62,7 @@ public class StudentController {
         list.add(new Student(2, "王五", 23, "男"));
         list.add(new Student(3, "赵四", 23, "男"));
         model.addAttribute("list", list);
-        return "/student_list.jsp";         //执行后返回一个界面
+        return "student_list";         //执行后返回一个界面
     }
 
     @RequestMapping("/deleteAll")
