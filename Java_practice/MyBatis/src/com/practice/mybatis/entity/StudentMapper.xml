@@ -15,6 +15,19 @@
     <select id="selectAll" resultType="Student">
         select id,name,age,gender,banji_id from student
     </select>
-    
+
+    <!-- 对于更新类的操作返回的是影响的行数，但是resultType不需要写
+     public void deleteById(Integer id)
+     更新类返回影响的行数，在这里不用写返回值类型
+    -->
+    <delete id="deleteById" parameterType="Integer">
+        delete from student where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="Student">
+        insert into student(name,age,gender,banji_id)
+        values(#{name},#{age},#{gender},#{banjiId})
+    </insert>
+
 </mapper>
   

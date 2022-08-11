@@ -61,8 +61,7 @@ public class Student {
         this.banjiId = banjiId;
     }
 
-    public Student(Integer id, String name, Integer age, String gender, Integer banjiId) {
-        this.id = id;
+    public Student(String name, Integer age, String gender, Integer banjiId) {
         this.name = name;
         this.age = age;
         this.gender = gender;

@@ -44,4 +44,30 @@ public class MyBatisTest {
             System.out.println(student);
         }
     }
+
+    @Test
+    public void delete() {
+        // Setting autocommit to false on JDBC Connection
+        // MyBatis把JDBC的autocommit设置为false，
+        // 当执行delete的时候并没有真正提交到数据库，对于更新类的操作需要手动提交。
+        // 在JDBC里面默认不需要用户手动提交因为autocommit 默认就是true，执行executeUpdate
+        // 的时候直接修改了数据库
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        int count = sqlSession.delete("student.deleteById", 15);
+        System.out.println(count);
+        //需要手动提交
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void add() {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        Student student = new Student("王五",24,"男",1);
+        int count = sqlSession.update("student.add", student);
+        System.out.println(count);
+        //需要手动提交
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }
