@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+
+	<bean name="banji" class="pojo.Banji">
+		<property name="id" value="1"/>
+		<property name="name" value="Java2012"/>
+	</bean>
+
+	<!-- IOC容器配置，要创建的所有对象都配置到这里，交给Spring容器来管理 -->
+	<!--默认scope值为singleton，单例模式创建容器是就会new新对象-->
+	<!--prototype：多例，会创建多个对象，此时getBean时才会创建新对象-->
+	<bean name="student" class="pojo.Student">
+	<!--值类型注入-->
+	<property name="id" value="1"/>
+	<property name="name" value="张三"/>
+	<property name="age" value="23"/>
+	<property name="gender" value="男"/>
+		<!-- ref:reference参考、引用
+       引用类型的注入
+   -->
+		<property name="banji" ref="banji"/>
+	</bean>
+
+	<bean name="studentDao" class="dao.Impl.StudentDaoImpl"/>
+	<bean name="studentService" class="service.Impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"/>
+	</bean>
+	<bean name="studentController" class="controller.StudentController">
+		<property name="studentService" ref="studentService"/>
+	</bean>
+</beans>
