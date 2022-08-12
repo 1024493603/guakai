@@ -5,11 +5,19 @@
 
 <mapper namespace="student">
     <sql id="studentColumns">
-        id,name,age,gender,banji_id
+        id,name,age,gender
     </sql>
 
-    <select id="selectAll">
+    <select id="selectByPage" resultType="student">
         select <include refid="studentColumns"/> from student
+        limit
+        <foreach collection="list" item="num" separator=",">
+            #{num}
+        </foreach>
+    </select>
+
+    <select id="countTotalNum" resultType="Integer">
+        select count(*) from student
     </select>
 </mapper>
   

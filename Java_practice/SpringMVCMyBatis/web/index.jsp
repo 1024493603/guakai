@@ -49,7 +49,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;"
-                               data-url="<%=request.getContextPath()%>/student"
+                               data-url="<%=request.getContextPath()%>/student/selectByPage.action"
                                class="site-demo-active">学生管理</a>
                         </dd>
                         <dd>
