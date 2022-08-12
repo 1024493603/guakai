@@ -177,4 +177,17 @@ public class MyBatisTest {
         sqlSession.commit();
         sqlSession.close();
     }
+
+    @Test
+    public void testSelectByCondition() {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        Student student = new Student();
+        //student.setName("王");
+        student.setAge(23);
+        student.setGender("女");
+        List<Student> list = sqlSession.selectList("student.selectByConditions", student);
+        for (Student s : list) {
+            System.out.println(s);
+        }
+    }
 }

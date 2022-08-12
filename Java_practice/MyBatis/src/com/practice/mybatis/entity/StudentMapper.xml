@@ -122,5 +122,27 @@
             #{id}
         </foreach>
     </delete>
+
+
+    <!--choose、when、otherwise-->
+    <!--if    else if    else if    else-->
+    <select id="selectByConditions" parameterType="Student" resultMap="studentMap">
+        select <include refid="studentColumns"/>
+        from student
+        where
+        <choose>
+            <when test="name!=null and name!=''">
+                name LIKE concat('%', #{name}, '%')
+            </when>
+            <when test="age!=null">
+                age=#{age}
+            </when>
+            <when test="gender!=null and gender!=''">
+                gender=#{gender}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
 </mapper>
   
