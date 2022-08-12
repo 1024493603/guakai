@@ -36,5 +36,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 加载映射文件 -->
 	<mappers>
 		<mapper resource="com/practice/mybatis/entity/StudentMapper.xml"/>
+		<mapper resource="com/practice/mybatis/entity/BanjiMapper.xml"/>
 	</mappers>
 </configuration>

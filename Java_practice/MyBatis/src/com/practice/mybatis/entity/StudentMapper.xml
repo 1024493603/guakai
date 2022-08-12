@@ -15,10 +15,6 @@
     <select id="selectById"  parameterType="Integer" resultType="Student">
         select <include refid="studentColumns"/> from student where id=#{id}
     </select>
-	
-    <select id="selectAll" resultType="Student">
-        select <include refid="studentColumns"/> from student
-    </select>
 
     <!-- 对于更新类的操作返回的是影响的行数，但是resultType不需要写
      public void deleteById(Integer id)
@@ -56,10 +52,23 @@
     <!--名字一样的可以不写，但建议全写-->
     <resultMap id="studentMap" type="student">
         <id column="id" property="id"/>     <!--主键用id-->
-        <result column="student_name" property="name"/>
+        <!--<result column="student_name" property="name"/>-->
+        <result column="name" property="name"/>
         <result column="age" property="age"/>
         <result column="gender" property="gender"/>
         <result column="banji_id" property="banjiId"/>
+        <association property="banji" javaType="Banji">
+            <id  column="banjiId" property="id"/>
+            <result column="banjiName" property="name" />
+        </association>
     </resultMap>
+
+    <select id="selectStudentBanjiInfo" resultMap="studentMap">
+        SELECT s.id, s.`name`, s.age, s.gender, b.id AS banjiId, b.name AS banjiName
+        FROM student AS s
+                 INNER JOIN banji AS b
+                            ON s.banji_id = b.id
+    </select>
+    
 </mapper>
   

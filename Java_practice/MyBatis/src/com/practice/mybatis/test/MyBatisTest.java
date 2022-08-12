@@ -1,5 +1,6 @@
 package com.practice.mybatis.test;
 
+import com.practice.mybatis.pojo.Banji;
 import com.practice.mybatis.pojo.Student;
 import com.practice.mybatis.util.MyBatisUtil;
 import org.apache.ibatis.io.Resources;
@@ -105,5 +106,27 @@ public class MyBatisTest {
         SqlSession sqlSession = MyBatisUtil.getSqlSession();
         int count = sqlSession.selectOne("student.selectTotalCount");
         System.out.println("count: " + count);
+    }
+
+    @Test
+    public void testSelectStudentBanjiInfo() throws IOException {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        List<Student> list = sqlSession.selectList("student.selectStudentBanjiInfo");
+        for (Student student : list) {
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void testSelectBanjiStudentInfo() throws IOException {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        List<Banji> list = sqlSession.selectList("banji.selectBanjiStudentInfo");
+        for (Banji banji : list) {
+            System.out.println(banji);
+            List<Student> studentList = banji.getList();
+            for (Student student : studentList) {
+                System.out.println(student);
+            }
+        }
     }
 }
