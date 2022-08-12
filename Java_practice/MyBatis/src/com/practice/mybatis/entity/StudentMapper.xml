@@ -69,6 +69,58 @@
                  INNER JOIN banji AS b
                             ON s.banji_id = b.id
     </select>
-    
+
+    <!--会自动去掉第一个参数的and-->
+    <select id="selectByCondition" parameterType="Student" resultMap="studentMap">
+        select <include refid="studentColumns"/>
+        from student
+        <where>
+            <if test="name != null and name != '' ">
+                and name like concat('%', #{name} ,'%')
+            </if>
+            <if test="age != null">
+                and age=#{age}
+            </if>
+            <if test="gender != null and gender != '' ">
+                and gender=#{gender}
+            </if>
+        </where>
+    </select>
+
+    <!--会自动去掉最后一个的,-->
+    <update id="updateCondition" parameterType="Student">
+        update student
+        <set>
+            <if test="name!=null and name != '' ">
+                name=#{name},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="gender!=null and gender!='' ">
+                gender=#{gender},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--由open开始 分隔符为separator 结束为close 内容为item-->
+    <!--item中的标识和#{}中的标识保持一致-->
+    <!--collection为类型，不是传过来的变量名，为小写-->
+    <delete id="deleteAllByArray">
+        delete from student
+        where id in
+        <foreach collection="array" open="(" item="id" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAllByList">
+        delete from student
+        where id in
+        <foreach collection="list" open="(" item="id" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
   

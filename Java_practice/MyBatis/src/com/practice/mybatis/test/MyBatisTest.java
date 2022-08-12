@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,5 +129,52 @@ public class MyBatisTest {
                 System.out.println(student);
             }
         }
+    }
+
+    @Test
+    public void selectByCondition() {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        Student stu = new Student();
+        stu.setName("王");
+        List<Student> list = sqlSession.selectList("student.selectByCondition", stu);
+        for (Student student : list) {
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void updateCondition() {
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        Student stu = new Student();
+        stu.setId(6);
+        stu.setAge(55);
+        stu.setName("哈人");
+        int count = sqlSession.update("student.updateCondition", stu);
+        System.out.println(count);
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteAllByArray() {
+        int[] array = {1,2,3};
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();;
+        int count = sqlSession.update("student.deleteAllByArray", array);
+        System.out.println("count: " + count);
+//        sqlSession.commit();
+//        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteAllByList() {
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(11);
+        list.add(12);
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
+        int count = sqlSession.update("student.deleteAllByList", list);
+        System.out.println("count: " + count);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
