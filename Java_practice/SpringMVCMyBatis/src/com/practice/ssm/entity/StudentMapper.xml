@@ -19,5 +19,9 @@
     <select id="countTotalNum" resultType="Integer">
         select count(*) from student
     </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from student where id = #{id}
+    </delete>
 </mapper>
   

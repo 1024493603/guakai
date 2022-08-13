@@ -28,4 +28,10 @@ public class StudentDaoImpl implements IStudentDao {
         return sqlSession.selectOne("student.countTotalNum");
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        sqlSession.delete("student.deleteById", id);
+        sqlSession.commit();
+    }
+
 }

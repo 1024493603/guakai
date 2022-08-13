@@ -5,4 +5,5 @@ import com.practice.ssm.util.PageInfo;
 
 public interface IStudentService {
     PageInfo<Student> selectByPage(Integer pageNo, Integer pageSize);
+    void deleteById(Integer id);
 }

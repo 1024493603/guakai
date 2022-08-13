@@ -7,4 +7,5 @@ import java.util.List;
 public interface IStudentDao {
     List<Student> selectByPage(Integer offset, Integer pageSize);
     Integer countTotalNum();
+    void deleteById(Integer id);
 }

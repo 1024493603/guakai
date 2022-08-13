@@ -23,4 +23,11 @@ public class StudentController {
         model.addAttribute("pageInfo", pageInfo);
         return "student_list";
     }
+
+    @RequestMapping("/deleteById")
+    public String  deleteById(Integer id) {
+        System.out.println("StudentController.deleteById");
+        studentService.deleteById(id);
+        return "redirect:/student/selectByPage.action";
+    }
 }

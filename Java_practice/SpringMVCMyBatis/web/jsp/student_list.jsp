@@ -43,7 +43,7 @@
     function deleteById(id) {
         var isDelete = confirm("确认删除？");
         if (isDelete) {
-            location.href="<%=request.getContextPath()%>/student?method=deleteById&id=" + id;
+            location.href="<%=request.getContextPath()%>/student/deleteById.action?&id=" + id;
         }
     }
 </script>

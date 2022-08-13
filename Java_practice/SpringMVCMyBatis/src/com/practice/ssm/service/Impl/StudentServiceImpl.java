@@ -21,4 +21,9 @@ public class StudentServiceImpl implements IStudentService {
 
         return new PageInfo<>(list, totalPage, pageNo, pageSize);
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        iStudentDao.deleteById(id);
+    }
 }
