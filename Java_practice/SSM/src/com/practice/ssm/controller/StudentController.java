@@ -16,7 +16,7 @@ public class StudentController {
     private IStudentService studentService;
 
     @RequestMapping("/selectAll")
-    @ResponseBody
+    @ResponseBody   //返回json格式
     public List<Student> selectAll() {
         System.out.println("StudentController.selectAll");
         List<Student> list = studentService.selectAll();

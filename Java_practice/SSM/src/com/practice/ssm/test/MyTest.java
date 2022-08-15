@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+//下两条为在SSM中使用单元测试
+
 //帮助我们创建IOC容器
 @RunWith(SpringJUnit4ClassRunner.class)
 //加载Spring的核心配置文件
