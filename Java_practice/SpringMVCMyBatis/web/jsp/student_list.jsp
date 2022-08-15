@@ -1,4 +1,4 @@
-<%@ page import="com.practice.ssm.pojo.Student" %><%--
+<%@ page import="com.practice.springmvc.pojo.Student" %><%--
   Created by IntelliJ IDEA.
   User: 10244
   Date: 2022/8/11

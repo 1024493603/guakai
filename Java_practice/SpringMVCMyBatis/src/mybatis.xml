@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="Student" type="com.situ.mybatis.pojo.Student"/>
         <typeAlias alias="Banji" type="com.situ.mybatis.pojo.Banji"/> -->
 		<!-- 扫描包里面的类，批量起别名，别名即类名，不区分大小写 -->
-		<package name="com.practice.ssm.pojo"/>
+		<package name="com.practice.springmvc.pojo"/>
 	</typeAliases>
 
 	<environments default="development">

@@ -30,11 +30,11 @@
 	<!--<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="com.practice.ssm.interceptor.MyInterceptor1"/>
+			<bean class="com.practice.springmvc.interceptor.MyInterceptor1"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="com.practice.ssm.interceptor.MyInterceptor2"/>
+			<bean class="com.practice.springmvc.interceptor.MyInterceptor2"/>
 		</mvc:interceptor>
 	</mvc:interceptors>-->
 </beans>
