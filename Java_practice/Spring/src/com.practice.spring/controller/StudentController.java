@@ -1,6 +1,6 @@
-package controller;
+package com.practice.spring.controller;
 
-import service.IStudentService;
+import com.practice.spring.service.IStudentService;
 
 public class StudentController {
     // private IStudentService studentService = new StudentServiceImpl();

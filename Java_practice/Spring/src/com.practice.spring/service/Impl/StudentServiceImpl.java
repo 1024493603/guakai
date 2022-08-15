@@ -1,7 +1,7 @@
-package service.Impl;
+package com.practice.spring.service.Impl;
 
-import dao.IStudentDao;
-import service.IStudentService;
+import com.practice.spring.dao.IStudentDao;
+import com.practice.spring.service.IStudentService;
 
 public class StudentServiceImpl implements IStudentService {
     private IStudentDao studentDao;

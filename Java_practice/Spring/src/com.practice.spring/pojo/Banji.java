@@ -1,4 +1,4 @@
-package pojo;
+package com.practice.spring.pojo;
 
 import java.util.List;
 

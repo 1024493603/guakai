@@ -1,4 +1,4 @@
-package pojo;
+package com.practice.spring.pojo;
 
 public class Student {
     private Integer id;

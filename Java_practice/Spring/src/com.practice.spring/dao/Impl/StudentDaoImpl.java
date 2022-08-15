@@ -1,6 +1,6 @@
-package dao.Impl;
+package com.practice.spring.dao.Impl;
 
-import dao.IStudentDao;
+import com.practice.spring.dao.IStudentDao;
 
 public class StudentDaoImpl implements IStudentDao {
     @Override
