@@ -34,4 +34,20 @@ public class StudentDaoImpl implements IStudentDao {
         sqlSession.commit();
     }
 
+    @Override
+    public void add(Student student) {
+        sqlSession.insert("student.add",student);
+    }
+
+    @Override
+    public Student selectById(Integer id) {
+        return sqlSession.selectOne("student.selectById", id);
+    }
+
+    @Override
+    public void update(Student student) {
+        sqlSession.update("student.update", student);
+        sqlSession.commit();
+    }
+
 }

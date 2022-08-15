@@ -10,13 +10,14 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/bootstrap-3.4.1-dist/css/bootstrap.css"/>
+    <script src="<%=request.getContextPath()%>/static/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body>
 <table class="table table-striped table-bordered table-hover table-condensed">
     <tr>
         <td >
-            <a href="<%=request.getContextPath()%>/student_add.jsp">添加</a>
+            <a href="<%=request.getContextPath()%>/jsp/student_add.jsp">添加</a>
         </td>
     </tr>
     <tr>
@@ -34,7 +35,7 @@
             <td>${student.age}</td>
             <td>${student.gender}</td>
             <td><a href="javascript:deleteById(${student.id})">删除</a></td>
-            <td><a href="${pageContext.request.contextPath}/student?method=getStudentUpdatePage&id=${student.id}">编辑</a></td>
+            <td><a href="${pageContext.request.contextPath}/student/selectById.action?id=${student.id}">编辑</a></td>
         </tr>
     </c:forEach>
 </table>
