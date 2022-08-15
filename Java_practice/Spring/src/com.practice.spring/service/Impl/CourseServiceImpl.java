@@ -18,7 +18,12 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public void selectAll() {
+        long begin = System.currentTimeMillis();
+
         System.out.println("CourseServiceImpl.selectAll");
         courseDao.selectAll();
+
+        long end = System.currentTimeMillis();
+        long takeTime = end - begin;
     }
 }
