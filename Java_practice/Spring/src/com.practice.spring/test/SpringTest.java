@@ -1,5 +1,6 @@
 package com.practice.spring.test;
 
+import com.practice.spring.controller.BanjiController;
 import com.practice.spring.controller.CourseController;
 import com.practice.spring.controller.StudentController;
 import com.practice.spring.pojo.Student;
@@ -29,5 +30,12 @@ public class SpringTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         CourseController courseController = (CourseController) context.getBean("courseController");
         courseController.selectAll();
+    }
+
+    @Test
+    public void test5() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        BanjiController banjiController = (BanjiController) context.getBean("banjiController");
+        banjiController.selectAll();
     }
 }
