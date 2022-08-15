@@ -26,4 +26,14 @@ public class CourseServiceImpl implements ICourseService {
         long end = System.currentTimeMillis();
         long takeTime = end - begin;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        System.out.println("CourseServiceImpl.deleteById");
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
