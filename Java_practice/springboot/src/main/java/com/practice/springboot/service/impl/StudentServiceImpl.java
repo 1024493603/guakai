@@ -10,6 +10,8 @@ import java.util.List;
 
 @Service
 public class StudentServiceImpl implements IStudentService {
+
+    //此处报错不管
     @Autowired
     private StudentMapper studentMapper;
 

@@ -4,6 +4,7 @@ import com.practice.springboot.pojo.Student;
 import com.practice.springboot.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,5 +30,13 @@ public class StudentController {
 
         List<Student> list = studentService.selectAll();
         return list;
+    }
+
+    @RequestMapping("/selectByPage")
+    public String selectByPage(Model model) {
+        System.out.println("StudentController.selectByPage");
+        List<Student> list = studentService.selectAll();
+        model.addAttribute("list", list);
+        return "/WEB-INF/student_list.jsp";
     }
 }

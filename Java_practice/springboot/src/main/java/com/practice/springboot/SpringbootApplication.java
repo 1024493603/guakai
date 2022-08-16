@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//默认扫描同级的所有包和他们的子包
 
 // 声明该类是一个SpringBoot的引导类
 @SpringBootApplication
