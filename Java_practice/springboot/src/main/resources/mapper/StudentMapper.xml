@@ -10,5 +10,15 @@
 		SELECT id,name,age,gender
 		FROM student
 	</select>
+
+	<select id="selectByPage" resultType="Student">
+		SELECT id,name,age,gender
+		FROM student
+				 LIMIT #{offset},#{limit}
+	</select>
+
+	<select id="selectTotalCount" resultType="Integer">
+		SELECT count(*) FROM student
+	</select>
 </mapper>
   

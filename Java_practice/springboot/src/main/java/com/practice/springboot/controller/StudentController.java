@@ -2,6 +2,7 @@ package com.practice.springboot.controller;
 
 import com.practice.springboot.pojo.Student;
 import com.practice.springboot.service.IStudentService;
+import com.practice.springboot.util.LayUITableJSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +33,22 @@ public class StudentController {
         return list;
     }
 
-    @RequestMapping("/selectByPage")
-    public String selectByPage(Model model) {
+    @RequestMapping("/selectByPage1")
+    public String selectByPage1(Model model) {
         System.out.println("StudentController.selectByPage");
         List<Student> list = studentService.selectAll();
         model.addAttribute("list", list);
         return "/WEB-INF/student_list.jsp";
+    }
+
+    @RequestMapping("/getStudentListPage")
+    public String getStudentListPage() {
+        return "/WEB-INF/student_list.jsp";
+    }
+
+    @RequestMapping("/selectByPage")
+    @ResponseBody
+    public LayUITableJSONResult selectByPage(Integer page, Integer limit) {
+        return studentService.selectByPage(page, limit);
     }
 }
