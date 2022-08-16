@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.practice.maven.mapper.StudentMapper">
+	
+	<!-- public List<User> selectAll(); -->
+	<select id="selectAll" resultType="Student">
+		SELECT id,name,age,gender
+		FROM student
+	</select>
+</mapper>
+  

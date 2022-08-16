@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 定义类型别名 -->
+	<typeAliases>
+		<!-- 扫描包里面的类，批量起别名，别名即为类名，别名不区分大小写 -->
+		<package name="com.practice.maven.pojo"/>
+	</typeAliases>
+</configuration>
