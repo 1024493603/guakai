@@ -38,7 +38,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginIntercepter())
                 .addPathPatterns("/**")     //拦截全部
-                .excludePathPatterns("/user/login", "/user/getLoginPage", "static/**");     //排除部分
+                .excludePathPatterns("/user/login", "/user/getLoginPage", "/auth/code", "/error", "/static/**");     //排除部分
 
     }
 
