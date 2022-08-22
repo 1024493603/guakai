@@ -2,6 +2,7 @@ package com.practice.mall.controller;
 
 import com.practice.mall.pojo.Product;
 import com.practice.mall.service.IProductService;
+import com.practice.mall.util.LayUITableJSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,5 +19,16 @@ public class ProductController {
     @ResponseBody
     public Product selectById(Integer id) {
         return productService.selectById(id);
+    }
+
+    @RequestMapping("/getProductListPage")
+    public String getProductListPage() {
+        return "product_list";
+    }
+
+    @RequestMapping("/selectByPage")
+    @ResponseBody
+    public LayUITableJSONResult selectByPage(Integer page, Integer limit) {
+        return productService.selectByPage(page, limit);
     }
 }

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>主页</title>
-    <link rel="stylesheet" type="text/css" href="static/layui/css/layui.css"/>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -15,7 +15,7 @@
                 <a href="javascript:;">
                     <%-- 				        <img src="<%=path%>/img/fei.png" --%>
                     <!-- 				        class="layui-nav-img"/> -->
-                    用户${user.name}
+                    用户${user.username}
                     <%-- 				        	[${user.name}] --%>
                 </a>
                 <dl class="layui-nav-child">
@@ -44,8 +44,8 @@
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;"
-                               data-url="${pageContext.request.contextPath}/teacher"
-                               class="site-demo-active">教师管理</a>
+                               data-url="/product/getProductListPage"
+                               class="site-demo-active">商品管理</a>
                         </dd>
                         <dd>
                             <a href="javascript:;"
@@ -88,7 +88,7 @@
     </div>
     <div class="layui-footer">© JAVA - 底部固定区域</div>
 </div>
-<script src="static/layui/layui.js"></script>
+
 <script type="text/javascript">
     var $ = layui.jquery;
     var layer = layui.layer;

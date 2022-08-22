@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <%@include file="header.jsp"%>
 </head>
 <body>
     <form id="formId" method="post">
@@ -19,9 +20,6 @@
         <input type="button" onclick="submitForm()" value="登陆"/>
     </form>
 
-    <script src="<%=request.getContextPath()%>/static/jquery-2.1.4.js"></script>
-    <script src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
-    <script src="<%=request.getContextPath()%>/static/mylayer.js"></script>
     <script>
         function submitForm() {
             $.post(
