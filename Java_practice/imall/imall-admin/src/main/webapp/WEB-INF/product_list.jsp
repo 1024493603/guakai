@@ -38,6 +38,10 @@
     {{#    }                         }}
 </script>
 
+<script type="text/html" id="mainImageTpl">
+    <img src="/pic/{{d.mainImage}}"/>
+</script>
+
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 <script>
     layui.use('table', function(){
@@ -52,7 +56,7 @@
                 {type:'checkbox', fixed: 'left'}
                 ,{field:'id', title: 'ID', sort: true}
                 ,{field:'name',  title: '用户名'}
-                ,{field:'main_image', title: '主图'}
+                ,{field:'mainImage', title: '主图', templet: "#mainImageTpl"}
                 ,{field:'price', title: '价格'}
                 ,{field:'stock', title: '库存'}
                 ,{field:'status', title: '状态', templet:"#statusTpl"}
@@ -104,7 +108,7 @@
                     layer.open({
                         type : 2,
                         area : ['550px', '350px'],
-                        content: '/product_add.jsp'
+                        content: '/product/getProductAddPage'
                     });
                     break;
                 case 'deleteAll':

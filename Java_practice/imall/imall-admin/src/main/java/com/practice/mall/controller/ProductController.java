@@ -31,4 +31,9 @@ public class ProductController {
     public LayUITableJSONResult selectByPage(Integer page, Integer limit) {
         return productService.selectByPage(page, limit);
     }
+
+    @RequestMapping("/getProductAddPage")
+    public String getProductAddPage() {
+        return "product_add";
+    }
 }
