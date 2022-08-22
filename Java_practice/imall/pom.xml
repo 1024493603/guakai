@@ -11,6 +11,8 @@
     <modules>
         <module>imall-common</module>
         <module>imall-mbg</module>
+        <module>imall-portal</module>
+        <module>imall-admin</module>
     </modules>
 
     <!--这是一个聚合项目pom，在最外层。一共有三种项目jar、war、pom-->

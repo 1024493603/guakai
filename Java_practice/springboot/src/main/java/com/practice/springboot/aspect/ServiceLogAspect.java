@@ -26,7 +26,7 @@ public class ServiceLogAspect {
      * 第四处 * 代表类名,   *代表所有类
      * 第五处 *(..) *代表类中的方法名，(..)表示方法中的任何参数
      */
-    @Around("execution(* com.situ.springboot.service.impl..*.*(..))")
+    @Around("execution(* com.practice.springboot.service.impl..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("ServiceLogAspect.recordTimeLog");
         // {}是占位符
