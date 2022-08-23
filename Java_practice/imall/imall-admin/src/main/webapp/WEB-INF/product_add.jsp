@@ -68,6 +68,24 @@
             <input type="radio" name="status" value="3" title="删除">
         </div>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片上传</label>
+        <div class="layui-input-block">
+            <div class="layui-upload">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo1" width="150px" height="150px">
+                    <input type="hidden" name="mainImage" id="mainImage"/>
+                    <p id="demoText"></p>
+                </div>
+                <%--<div style="width: 95px;">
+                    <div class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
+                        <div class="layui-progress-bar" lay-percent=""></div>
+                    </div>
+                </div>--%>
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+            </div>
+        </div>
+    </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">商品详情</label>
         <div class="layui-input-block">
@@ -82,12 +100,50 @@
     </div>
 </form>
 
-<script src="../static/kindeditor/kindeditor.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var form;
-    layui.use(['form'], function() {
+    layui.use(['form', 'upload'], function() {
         form = layui.form;
+        var upload = layui.upload;
 
+        //常规使用 - 普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/upload/uploadImage' //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+
+                // element.progress('demo', '0%'); //进度条复位
+                layer.msg('上传中', {icon: 16, time: 0});
+            }
+            ,done: function(jsonResult){
+                //如果上传失败
+                if(jsonResult.code == 1){
+                    return layer.msg('上传失败');
+                }
+                //上传成功的一些操作
+                //……
+                $('#mainImage').val(jsonResult.data);
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #ff5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+            //进度条
+            ,progress: function(n, elem, e){
+                element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+                if(n == 100){
+                    layer.msg('上传完毕', {icon: 1});
+                }
+            }
+        });
         // 发送ajax请求之后在select追加append之后
         // form.render('select');
     });

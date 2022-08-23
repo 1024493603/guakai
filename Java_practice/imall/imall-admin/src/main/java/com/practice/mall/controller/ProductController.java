@@ -2,6 +2,7 @@ package com.practice.mall.controller;
 
 import com.practice.mall.pojo.Product;
 import com.practice.mall.service.IProductService;
+import com.practice.mall.util.JSONResult;
 import com.practice.mall.util.LayUITableJSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,5 +36,11 @@ public class ProductController {
     @RequestMapping("/getProductAddPage")
     public String getProductAddPage() {
         return "product_add";
+    }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public JSONResult add(Product product) {
+        return productService.add(product);
     }
 }

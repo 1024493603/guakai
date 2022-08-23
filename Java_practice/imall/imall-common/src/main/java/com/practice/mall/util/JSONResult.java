@@ -1,8 +1,10 @@
 package com.practice.mall.util;
 
+// JSON格式的通用响应对象，封装的就是后台返回给前台的所有信息
 public class JSONResult {
     public static final int ERROR = 1;
     public static final int OK = 0;
+    public static final int NO_PERMISSTION = 2;
 
     // 当前状态（程序员判断状态）:成功、失败、未登录、没有权限
     // 当前登录是成功还是失败要告诉前台，前台才能知道弹出的提示框用errorMsg、okMsg
@@ -12,9 +14,9 @@ public class JSONResult {
     // 后台返回给前端的数据 Object， User、List<User>
     private Object data;
 
-    public boolean isOk() {
-        return code == 0;
-    }
+	/*public boolean isOk() {
+		return code == OK;
+	}*/
 
     public JSONResult() {
     }
@@ -93,4 +95,5 @@ public class JSONResult {
     public void setData(Object data) {
         this.data = data;
     }
+
 }

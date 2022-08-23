@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.practice.mall.mapper.ProductMapper;
 import com.practice.mall.pojo.Product;
 import com.practice.mall.service.IProductService;
+import com.practice.mall.util.JSONResult;
 import com.practice.mall.util.LayUITableJSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,11 @@ public class ProductServiceImpl implements IProductService {
         long totalCount = pageInfo.getTotal();
 
         return LayUITableJSONResult.ok((int)totalCount, list);
+    }
+
+    @Override
+    public JSONResult add(Product product) {
+        productMapper.insert(product);
+        return JSONResult.ok("插入成功");
     }
 }
