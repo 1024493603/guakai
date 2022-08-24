@@ -1,6 +1,8 @@
 package com.practice.mall.controller;
 
+import com.practice.mall.util.ImageServerUtil;
 import com.practice.mall.util.JSONResult;
+import com.practice.mall.util.QiniuUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +27,20 @@ public class UploadController {
         System.out.println("fileName: " + fileName);//aa.jpg
         String extension = FilenameUtils.getExtension(fileName);//jpg
         String newFileName = name + "." + extension;//52635b3153cf415da70179a2c472b3b9.jpg
-        String filePath = "D:\\mypic\\" + newFileName;//D:/mypic/52635b3153cf415da70179a2c472b3b9.jpg
-        try {
-            file.transferTo(new File(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (ImageServerUtil.IMG_SERVER == ImageServerUtil.LOCAL) {
+            String filePath = "D:\\mypic\\" + newFileName;//D:/mypic/52635b3153cf415da70179a2c472b3b9.jpg
+            try {
+                file.transferTo(new File(filePath));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                QiniuUtils.upload2Qiniu(file.getBytes(), newFileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return JSONResult.ok("上传成功", newFileName);

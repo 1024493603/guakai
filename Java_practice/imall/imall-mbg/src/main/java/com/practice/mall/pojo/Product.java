@@ -1,5 +1,7 @@
 package com.practice.mall.pojo;
 
+import com.practice.mall.util.ImageServerUtil;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,6 +32,10 @@ public class Product implements Serializable {
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
+
+    public String getMainImageUrl() {
+        return ImageServerUtil.getImageUrl(mainImage);
+    }
 
     public Integer getId() {
         return id;
