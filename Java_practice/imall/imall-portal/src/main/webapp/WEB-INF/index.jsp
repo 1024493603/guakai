@@ -61,16 +61,15 @@
 
 	<div class="center_con clearfix">
 		<ul class="subnav fl">
-			<li>
-				<c:forEach items="${topCategoryList}" var="topCategory">
-					${topCategory.name}
-					<c:forEach items="${secondCategoryList}" var="secondCategory">
-						<c:if test="${secondCategory.parentId==topCategory.id}">
-							<a href="/product/getProductListPage?id=${secondCategory.id}">${secondCategory.name}</a>
-						</c:if>
-					</c:forEach>
+			<c:forEach items="${topCategoryList}" var="topCategory">
+				${topCategory.name}<br/>
+				<c:forEach items="${secondCategoryList}" var="secondCategory">
+					<c:if test="${secondCategory.parentId==topCategory.id}">
+						<a href="/product/getProductListPage?id=${secondCategory.id}">${secondCategory.name}</a>
+					</c:if>
 				</c:forEach>
-			</li>
+				<hr/>
+			</c:forEach>
 		</ul>
 		<div class="slide fl">
 			<ul class="slide_pics">
