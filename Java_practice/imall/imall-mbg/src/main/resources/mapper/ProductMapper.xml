@@ -180,4 +180,11 @@
     <include refid="Base_Column_List" />
     from product
   </select>
+
+  <select id="selectListByCategoryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where category_id=#{id}
+  </select>
 </mapper>

@@ -2,9 +2,10 @@
 <html>
 <head>
 	<%@ include file="header.jsp"%>
-	<title>天天生鲜-商品列表</title>
+	<title>天天生鲜-商品详情</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
 </head>
 <body>
 	<div class="header_con">
@@ -38,8 +39,8 @@
 			<input type="button" class="input_btn fr" name="" value="搜索">
 		</div>
 		<div class="guest_cart fr">
-			<a href="#" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl">1</div>
+			<a href="cart.html" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">1</div>
 		</div>
 	</div>
 
@@ -71,6 +72,34 @@
 		<a href="#">全部分类</a>
 		<span>></span>
 		<a href="#">新鲜水果</a>
+		<span>></span>
+		<a href="#">商品详情</a>
+	</div>
+
+	<div class="goods_detail_con clearfix">
+		<div class="goods_detail_pic fl"><img width="350px" height="350px" src="${product.mainImageUrl}"></div>
+
+		<div class="goods_detail_list fr">
+			<h3>${product.name}</h3>
+			<p>${product.subtitle}</p>
+			<div class="prize_bar">
+				<span class="show_pirze">¥<em>${product.price}</em></span>
+				<span class="show_unit">单  位：500g</span>
+			</div>
+			<div class="goods_num clearfix">
+				<div class="num_name fl">数 量：</div>
+				<div class="num_add fl">
+					<input type="text" class="num_show fl" value="1">
+					<a href="javascript:;" class="add fr">+</a>
+					<a href="javascript:;" class="minus fr">-</a>	
+				</div> 
+			</div>
+			<div class="total">总价：<em>16.80元</em></div>
+			<div class="operate_btn">
+				<a href="javascript:;" class="buy_btn">立即购买</a>
+				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
+			</div>
+		</div>
 	</div>
 
 	<div class="main_wrap clearfix">
@@ -93,37 +122,18 @@
 		</div>
 
 		<div class="r_wrap fr clearfix">
-			<div class="sort_bar">
-				<a href="#" class="active">默认</a>
-				<a href="#">价格</a>
-				<a href="#">人气</a>
-			</div>
-
-			<ul class="goods_type_list clearfix">
-				<c:forEach items="${list}" var="product">
-					<li>
-						<a href="/product/getProductDetailPage?id=${product.id}">
-							<img src="${product.mainImageUrl}"></a>
-						<h4>${product.name}</h4>
-						<div class="operate">
-							<span class="prize">￥${product.price}</span>
-							<span class="unit">${product.stock}</span>
-							<a href="#" class="add_goods" title="加入购物车"></a>
-						</div>
-					</li>
-				</c:forEach>
-
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介绍</li>
+				<li>评论</li>
 			</ul>
 
-			<div class="pagenation">
-				<a href="#"><上一页</a>
-				<a href="#" class="active">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<a href="#">下一页></a>
+			<div class="tab_content">
+				<dl>
+					<dt>商品详情：</dt>
+					<dd>${product.detail}</dd>
+				</dl>
 			</div>
+
 		</div>
 	</div>
 
@@ -140,6 +150,29 @@
 		<p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
+	<div class="add_jump"></div>
+
+	<script type="text/javascript" src="/static/js/jquery-1.12.2.js"></script>
+	<script type="text/javascript">
+		var $add_x = $('#add_cart').offset().top;
+		var $add_y = $('#add_cart').offset().left;
+
+		var $to_x = $('#show_count').offset().top;
+		var $to_y = $('#show_count').offset().left;
+
+		$(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
+		$('#add_cart').click(function(){
+			$(".add_jump").stop().animate({
+				'left': $to_y+7,
+				'top': $to_x+7},
+				"fast", function() {
+					$(".add_jump").fadeOut('fast',function(){
+						$('#show_count').html(2);
+					});
+
+			});
+		})
+	</script>
 	
 </body>
 </html>

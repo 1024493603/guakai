@@ -29,4 +29,11 @@ public class ProductController {
         model.addAttribute("list", list);
         return "product_list";
     }
+
+    @RequestMapping("/getProductDetailPage")
+    public String getProductDetailPage(Integer id, Model model) {
+        Product product = productService.selectById(id);
+        model.addAttribute("product", product);
+        return "product_detail";
+    }
 }
