@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -21,7 +19,7 @@ public class IndexController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private Map<String, List<Category>> map = new HashMap<>();
+    //private Map<String, List<Category>> map = new HashMap<>();
     // 设置项目默认的首页（欢迎页）
     // http://localhost:8080/
     // 如果是80端口号，可以不用写
@@ -29,12 +27,16 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model) {
         System.out.println("IndexController.index");
+        //用Map实现Redis
+        //缺陷
+        // 1.关闭服务器之后清空
+        // 2.无法实现分布式
         /*List<Category> topCategoryList = map.get("topCategoryList");
         if (CollectionUtils.isEmpty(topCategoryList)) {
-            topCategoryList = categoryService.selectTopCategoryList();
+            topCategoryList = categoryService.selectTopCategoryList();      //如果为空则查询数据库放入Map
             map.put("topCategoryList", topCategoryList);
         }
-        List<Category> secondCategoryList = map.get("secondCategoryList");
+        List<Category> secondCategoryList = map.get("secondCategoryList");  //二级分类同样
         if (CollectionUtils.isEmpty(secondCategoryList)) {
             secondCategoryList = categoryService.selectSecondCategoryList();
             map.put("secondCategoryList", secondCategoryList);

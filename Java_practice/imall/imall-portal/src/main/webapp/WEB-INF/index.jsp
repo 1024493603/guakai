@@ -61,9 +61,9 @@
 
 	<div class="center_con clearfix">
 		<ul class="subnav fl">
-			<c:forEach items="${topCategoryList}" var="topCategory">
+			<c:forEach items="${topCategoryList}" var="topCategory">	<%--遍历一级分类--%>
 				${topCategory.name}<br/>
-				<c:forEach items="${secondCategoryList}" var="secondCategory">
+				<c:forEach items="${secondCategoryList}" var="secondCategory">	<%--遍历二级分类--%>
 					<c:if test="${secondCategory.parentId==topCategory.id}">
 						<a href="/product/getProductListPage?id=${secondCategory.id}">${secondCategory.name}</a>
 					</c:if>

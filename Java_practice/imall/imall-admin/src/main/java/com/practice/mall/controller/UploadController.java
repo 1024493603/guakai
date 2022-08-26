@@ -22,13 +22,13 @@ public class UploadController {
     @RequestMapping("/uploadImage")
     @ResponseBody
     public JSONResult uploadImage(MultipartFile file) {
-        String name = UUID.randomUUID().toString().replace("-", "");
-        String fileName = file.getOriginalFilename();
+        String name = UUID.randomUUID().toString().replace("-", "");    //生成随机文件名
+        String fileName = file.getOriginalFilename();       //获得上传文件名
         System.out.println("fileName: " + fileName);//aa.jpg
-        String extension = FilenameUtils.getExtension(fileName);//jpg
-        String newFileName = name + "." + extension;//52635b3153cf415da70179a2c472b3b9.jpg
+        String extension = FilenameUtils.getExtension(fileName);//jpg   获得文件后缀
+        String newFileName = name + "." + extension;//52635b3153cf415da70179a2c472b3b9.jpg  拼接形成新的文件名
 
-        if (ImageServerUtil.IMG_SERVER == ImageServerUtil.LOCAL) {
+        if (ImageServerUtil.IMG_SERVER == ImageServerUtil.LOCAL) {      //判断存为本地还是云端
             String filePath = "D:\\mypic\\" + newFileName;//D:/mypic/52635b3153cf415da70179a2c472b3b9.jpg
             try {
                 file.transferTo(new File(filePath));

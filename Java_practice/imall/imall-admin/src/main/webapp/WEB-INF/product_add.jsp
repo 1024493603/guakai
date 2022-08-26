@@ -74,6 +74,7 @@
             <div class="layui-upload">
                 <div class="layui-upload-list">
                     <img class="layui-upload-img" id="demo1" width="150px" height="150px">
+                    <%--隐藏显示名字，用于保存在数据库中--%>
                     <input type="hidden" name="mainImage" id="mainImage"/>
                     <p id="demoText"></p>
                 </div>
