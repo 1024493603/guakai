@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>天天生鲜-首页</title>
+	<%@ include file="header.jsp"%>
 	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
@@ -65,7 +66,7 @@
 					${topCategory.name}
 					<c:forEach items="${secondCategoryList}" var="secondCategory">
 						<c:if test="${secondCategory.parentId==topCategory.id}">
-							<a href="#">${secondCategory.name}</a>
+							<a href="/product/getProductListPage?id=${secondCategory.id}">${secondCategory.name}</a>
 						</c:if>
 					</c:forEach>
 				</c:forEach>

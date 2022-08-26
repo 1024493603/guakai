@@ -6,6 +6,8 @@ import com.practice.mall.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements IProductService {
     @Autowired
@@ -15,4 +17,10 @@ public class ProductServiceImpl implements IProductService {
     public Product selectById(Integer id) {
         return productMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<Product> selectListByCategoryId(Integer id) {
+        return productMapper.selectListByCategoryId(id);
+    }
+
 }
