@@ -7,11 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // 声明该类是一个SpringBoot的引导类
 @SpringBootApplication
 // @MapperScan注解，扫描MyBatis Mapper接口类
 @MapperScan("com.practice.mall.mapper")
+//quartz定时任务
+@EnableScheduling
 public class PortalApplication {
     private static final Logger LOG = LoggerFactory.getLogger(PortalApplication.class);
 

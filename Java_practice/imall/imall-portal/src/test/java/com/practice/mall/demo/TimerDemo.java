@@ -11,7 +11,7 @@ public class TimerDemo {
         //TimerTask:任务
         //firstTime:第一次执行的时间
         //peroid:间隔多久再执行
-        Date date = new Date();
+        Date date = new Date(); //默认当前时间
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
