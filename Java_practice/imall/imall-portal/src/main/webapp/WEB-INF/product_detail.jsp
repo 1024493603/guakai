@@ -89,7 +89,7 @@
 			<div class="goods_num clearfix">
 				<div class="num_name fl">数 量：</div>
 				<div class="num_add fl">
-					<input type="text" class="num_show fl" value="1">
+					<input type="text" class="num_show fl" id="quantity" value="1">
 					<a href="javascript:;" class="add fr">+</a>
 					<a href="javascript:;" class="minus fr">-</a>	
 				</div> 
@@ -152,8 +152,85 @@
 	</div>
 	<div class="add_jump"></div>
 
+	<%--要弹出的登录界面--%>
+	<div id="loginForm" style="display: none" class="login_form fr">
+		<div class="login_title clearfix">
+			<h1>用户登录</h1>
+			<a href="#">立即注册</a>
+		</div>
+		<div class="form_input">
+			<form id="formId">
+				<input type="text" name="username" class="name_input" placeholder="请输入用户名">
+				<div class="user_error">输入错误</div>
+				<input type="password" name="password" class="pass_input" placeholder="请输入密码">
+				<div class="pwd_error">输入错误</div>
+				<div class="more_input clearfix">
+					<input type="checkbox" name="">
+					<label>记住用户名</label>
+					<a href="#">忘记密码</a>
+				</div>
+				<input type="button" onclick="submitForm()" name="" value="登录" class="input_submit">
+			</form>
+		</div>
+	</div>
+
 	<script type="text/javascript" src="/static/js/jquery-1.12.2.js"></script>
 	<script type="text/javascript">
+
+		$('#add_cart').click(function (){
+			//加入购物车前判断有没有登陆
+			//没登录则首先完成登陆
+			//已经登陆则加入购物车并跳转
+			$.post(
+				'/user/checkUserLogin',
+				function(jsonResult) {
+					//getOk()
+					if (jsonResult.ok) {//已经登陆
+						insertToCart();
+					} else {
+						layer.open({
+							type : 1,
+							title : '登陆',
+							area : ['370px','480px'],
+							content : $('#loginFrom')
+						});
+					}
+				},
+				'json'
+			)
+		});
+
+		function submitForm() {
+			$.post(
+				'/user/login',
+				$('#formId').serialize(),
+				function(jsonResult) {
+					if (jsonResult.ok) {
+						//mylayer.okUrl(jsonResult.msg, '/cart/getCartListPage');
+						insertToCart();
+					} else {
+						mylayer.errorMsg(jsonResult.msg);
+					}
+				},
+				'json'
+			);
+		}
+
+		function insertToCart() {
+			$.post(
+				'/cart/add',
+				{'productId' : '${product.id}', 'quantity' : $('#quantity').val()},
+				function(jsonResult) {
+					if (jsonResult.ok) {
+						mylayer.okUrl(jsonResult.msg, '/cart/getCartListPage');
+					} else {
+						mylayer.errorMsg(jsonResult.msg);
+					}
+				},
+				'json'
+			);
+		}
+
 		var $add_x = $('#add_cart').offset().top;
 		var $add_y = $('#add_cart').offset().left;
 

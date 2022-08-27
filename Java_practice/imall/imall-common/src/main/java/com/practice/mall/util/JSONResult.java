@@ -14,9 +14,9 @@ public class JSONResult {
     // 后台返回给前端的数据 Object， User、List<User>
     private Object data;
 
-	/*public boolean isOk() {
+	public boolean isOk() {
 		return code == OK;
-	}*/
+	}
 
     public JSONResult() {
     }
