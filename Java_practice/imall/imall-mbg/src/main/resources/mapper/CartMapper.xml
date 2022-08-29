@@ -121,4 +121,10 @@
     ON c.product_id=p.id
     where user_id = #{id}
   </select>
+
+  <update id="updateChecked">
+    update cart
+    set checked = #{checked}
+    where id = #{id};
+  </update>
 </mapper>

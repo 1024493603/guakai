@@ -54,10 +54,10 @@
 		<ul class="cart_list_td clearfix">
 			<li class="col01">
 				<c:if test="${cartVO.checked==1}">
-					<input type="checkbox" name="" checked>
+					<input onclick="updateChecked(this.checked, ${cartVO.id})" type="checkbox" name="" checked>
 				</c:if>
 				<c:if test="${cartVO.checked==0}">
-					<input type="checkbox" name="">
+					<input onclick="updateChecked(this.checked, ${cartVO.id})" type="checkbox" name="">
 				</c:if>
 			</li>
 			<li class="col02"><img src="${cartVO.mainImageUrl}"></li>
@@ -96,6 +96,23 @@
 		<p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
-	
+
+	<script>
+		function updateChecked(check, id) {
+			var checked = check ? 1 : 0;
+			$.post(
+					'/cart/updateChecked',
+					{'checked' : checked,'id' : id},
+					function (jsonResult) {
+						if(jsonResult.ok) {
+							mylayer.okMsg(jsonResult.msg);
+						} else {
+							mylayer.errorMsg(jsonResult.msg);
+						}
+					},
+					'json'
+			);
+		}
+	</script>
 </body>
 </html>

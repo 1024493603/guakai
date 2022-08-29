@@ -36,4 +36,11 @@ public class CartController {
         model.addAttribute("list", list);
         return "cart_list";
     }
+
+    @RequestMapping("/updateChecked")
+    @ResponseBody
+    public JSONResult updateChecked(Integer id, Integer checked) {
+        cartService.updateChecked(id, checked);
+        return JSONResult.ok("更新成功");
+    }
 }

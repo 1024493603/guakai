@@ -9,4 +9,6 @@ public interface ICartService {
     void add(Cart cart);
 
     List<CartVO> selectByUserId(Integer id);
+
+    void updateChecked(Integer id, Integer checked);
 }
