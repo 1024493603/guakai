@@ -114,4 +114,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultType="CartVO">
+    SELECT c.id AS id,user_id,product_id,p.name AS productName,p.main_image AS productMainImage,p.price AS productPrice,quantity,checked
+    FROM cart AS c INNER JOIN product AS p
+    ON c.product_id=p.id
+    where user_id = #{id}
+  </select>
 </mapper>

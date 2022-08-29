@@ -174,7 +174,6 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="/static/js/jquery-1.12.2.js"></script>
 	<script type="text/javascript">
 
 		$('#add_cart').click(function (){
@@ -197,7 +196,7 @@
 					}
 				},
 				'json'
-			)
+			);
 		});
 
 		function submitForm() {
