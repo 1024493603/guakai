@@ -2,7 +2,6 @@ package com.practice.mall.controller;
 
 import com.practice.mall.pojo.Order;
 import com.practice.mall.pojo.Shipping;
-import com.practice.mall.pojo.User;
 import com.practice.mall.pojo.vo.CartVO;
 import com.practice.mall.service.ICartService;
 import com.practice.mall.service.IOrderService;
@@ -45,5 +44,10 @@ public class OrderController {
         order.setUserId(21);
         orderService.add(order);
         return JSONResult.ok("生成订单成功");
+    }
+
+    @RequestMapping("/getOrderListPage")
+    public String getOrderListPage() {
+        return "order_list";
     }
 }

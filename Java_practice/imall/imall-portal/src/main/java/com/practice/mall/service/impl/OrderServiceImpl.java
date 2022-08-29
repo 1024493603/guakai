@@ -10,10 +10,12 @@ import com.practice.mall.service.IOrderService;
 import com.practice.mall.util.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Transactional
 @Service
 public class OrderServiceImpl implements IOrderService {
     @Autowired
@@ -42,6 +44,7 @@ public class OrderServiceImpl implements IOrderService {
         for (CartVO cartVO : cartVOList) {
             OrderItem orderItem = new OrderItem();
             orderItem.setOrderNo(id);
+            orderItem.setUserId(order.getUserId());
             orderItem.setQuantity(cartVO.getQuantity());
             orderItem.setProductId(cartVO.getProductId());
             // 根据productId完全可以去product表查出来：name、price、mainImage
@@ -58,6 +61,9 @@ public class OrderServiceImpl implements IOrderService {
 
             payment = payment.add(totalPrice);
             orderItemMapper.insert(orderItem);
+
+            // 每次插入订单项时候，应该到购物车表里面把对应数据删除掉
+            cartMapper.deleteByPrimaryKey(cartVO.getId());
         }
         order.setPayment(payment);
         orderMapper.insert(order);
