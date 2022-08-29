@@ -137,4 +137,11 @@
     update cart set quantity = quantity + #{quantity}
     where user_id = #{userId} and product_id = #{productId}
   </update>
+
+  <select id="selectByUserIdAndChecked" parameterType="java.lang.Integer" resultType="CartVO">
+    SELECT c.id AS id,user_id,product_id,p.name AS productName,p.main_image AS productMainImage,p.price AS productPrice,quantity,checked
+    FROM cart AS c INNER JOIN product AS p
+                              ON c.product_id=p.id
+    where user_id = #{id} and checked = 1
+  </select>
 </mapper>
