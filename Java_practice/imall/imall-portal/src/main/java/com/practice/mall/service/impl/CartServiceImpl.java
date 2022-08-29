@@ -19,7 +19,12 @@ public class CartServiceImpl implements ICartService {
         //1、根据user_id和product_id来cart表看这个用户是否有这个商品
         //2、如果有了则更新数量
         //3、如果没有则执行insert
-        cartMapper.insert(cart);
+        int count = cartMapper.selectByUserIdAndProductId(cart);
+        if (count >= 1) {
+            cartMapper.updateQuantityByUserIdAndProductId(cart);
+        } else {
+            cartMapper.insert(cart);
+        }
     }
 
     @Override

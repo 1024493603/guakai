@@ -127,4 +127,14 @@
     set checked = #{checked}
     where id = #{id};
   </update>
+  
+  <select id="selectByUserIdAndProductId" parameterType="Cart" resultType="Integer">
+    select count(*) from cart
+    where user_id = #{userId} and product_id = #{productId}
+  </select>
+
+  <update id="updateQuantityByUserIdAndProductId" parameterType="Cart">
+    update cart set quantity = quantity + #{quantity}
+    where user_id = #{userId} and product_id = #{productId}
+  </update>
 </mapper>
