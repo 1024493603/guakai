@@ -45,7 +45,14 @@
 	<div class="common_list_con clearfix">
 		<dl>
 			<dt>寄送到：</dt>
-			<dd><input type="radio" name="" checked="">北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
+			<c:forEach items="${shippingList}" var="shipping">
+				<dd><input type="radio" name="shippingId" value="${shipping.id}" >
+						${shipping.receiverProvince}-
+						${shipping.receiverCity}-
+						${shipping.receiverDistrict} （
+						${shipping.receiverName}收）
+						${shipping.receiverPhone}</dd>
+			</c:forEach>
 		</dl>
 		<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
 
@@ -54,13 +61,13 @@
 	<h3 class="common_title">支付方式</h3>	
 	<div class="common_list_con clearfix">
 		<div class="pay_style_con clearfix">
-			<input type="radio" name="pay_style" checked>
+			<input type="radio" name="paymentType" value="0" checked>
 			<label class="cash">货到付款</label>
-			<input type="radio" name="pay_style">
+			<input type="radio" name="paymentType" value="1">
 			<label class="weixin">微信支付</label>
-			<input type="radio" name="pay_style">
-			<label class="zhifubao"></label>
-			<input type="radio" name="pay_style">
+			<input type="radio" name="paymentType" value="2">
+			<label class="zhifubao">支付宝支付</label>
+			<input type="radio" name="paymentType" value="3">
 			<label class="bank">银行卡支付</label>
 		</div>
 	</div>
@@ -126,17 +133,18 @@
 	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
 	<script type="text/javascript">
 		$('#order_btn').click(function() {
-			localStorage.setItem('order_finish',2);
-
-			$('.popup_con').fadeIn('fast', function() {
-
-				setTimeout(function(){
-					$('.popup_con').fadeOut('fast',function(){
-						window.location.href = 'index.html';
-					});	
-				},3000)
-				
-			});
+			$.post(
+					'/order/add',
+					{'shippingId' : $('input[name="shippingId"]:checked').val(), 'paymentType':$('input[name="paymentType"]:checked').val()},
+					function (jsonResult) {
+						if(jsonResult.ok) {
+							mylayer.okUrl(jsonResult.msg, '/order/getConfirmOrderPage');
+						} else {
+							mylayer.errorMsg(jsonResult.msg);
+						}
+					},
+					'json'
+			);
 		});
 	</script>
 </body>
