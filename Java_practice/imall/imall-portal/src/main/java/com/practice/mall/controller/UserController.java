@@ -24,6 +24,7 @@ public class UserController {
     }
 
     @RequestMapping("/login")
+    @ResponseBody
     public JSONResult login(String username, String password, HttpSession session) {
         User user = userServiceImpl.login(username, password);
         if (user == null) {
@@ -32,5 +33,10 @@ public class UserController {
             session.setAttribute("user", user);
             return JSONResult.ok("登录成功");
         }
+    }
+
+    @RequestMapping("/getLoginPage")
+    public String getLoginPage() {
+        return "login";
     }
 }

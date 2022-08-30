@@ -2,6 +2,7 @@ package com.practice.mall.controller;
 
 import com.practice.mall.pojo.Order;
 import com.practice.mall.pojo.Shipping;
+import com.practice.mall.pojo.User;
 import com.practice.mall.pojo.vo.CartVO;
 import com.practice.mall.service.ICartService;
 import com.practice.mall.service.IOrderService;
@@ -28,11 +29,11 @@ public class OrderController {
 
     @RequestMapping("/getConfirmOrderPage")
     public String getConfirmOrderPage(HttpSession session, Model model) {
-       // User user = (User) session.getAttribute("user");
-        List<Shipping> shippingList = shippingService.selectByUserId(21);
+        User user = (User) session.getAttribute("user");
+        List<Shipping> shippingList = shippingService.selectByUserId(user.getId());
         model.addAttribute("shippingList", shippingList);
 
-        List<CartVO> cartVOList = cartService.selectByUserIdAndChecked(21);
+        List<CartVO> cartVOList = cartService.selectByUserIdAndChecked(user.getId());
         model.addAttribute("cartVOList", cartVOList);
         return "confirm_order";
     }
@@ -40,8 +41,8 @@ public class OrderController {
     @RequestMapping("/add")
     @ResponseBody
     public JSONResult add(Order order, HttpSession session) {
-        //User user = (User) session.getAttribute("user");
-        order.setUserId(21);
+        User user = (User) session.getAttribute("user");
+        order.setUserId(user.getId());
         orderService.add(order);
         return JSONResult.ok("生成订单成功");
     }

@@ -23,16 +23,18 @@ public class CartController {
     @RequestMapping("/add")
     @ResponseBody
     public JSONResult add(Cart cart, HttpSession session) {
+        System.out.println("CartController.add");
         User user = (User) session.getAttribute("user");
         cart.setUserId(user.getId());
         cart.setChecked(1);
+        cartService.add(cart);
         return JSONResult.ok("添加成功");
     }
 
     @RequestMapping("/getCartListPage")
     public String getCartListPage(HttpSession session, Model model) {
-        //User user = (User) session.getAttribute("user");
-        List<CartVO> list = cartService.selectByUserId(21);
+        User user = (User) session.getAttribute("user");
+        List<CartVO> list = cartService.selectByUserId(user.getId());
         model.addAttribute("list", list);
         return "cart_list";
     }
