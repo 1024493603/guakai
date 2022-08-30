@@ -6,6 +6,7 @@ import com.practice.mall.mapper.OrderMapper;
 import com.practice.mall.pojo.Order;
 import com.practice.mall.pojo.OrderItem;
 import com.practice.mall.pojo.vo.CartVO;
+import com.practice.mall.pojo.vo.OrderVO;
 import com.practice.mall.service.IOrderService;
 import com.practice.mall.util.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,10 @@ public class OrderServiceImpl implements IOrderService {
         }
         order.setPayment(payment);
         orderMapper.insert(order);
+    }
+
+    @Override
+    public List<OrderVO> selectByUserId(Integer id) {
+        return orderMapper.selectByUserId(id);
     }
 }

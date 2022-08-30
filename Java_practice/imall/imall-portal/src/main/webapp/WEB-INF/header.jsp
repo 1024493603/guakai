@@ -9,3 +9,5 @@
 <script src="/static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
+
+<c:set var="IMG_SERVER_QINIU" value="http://rh1r2eaiw.hd-bkt.clouddn.com/"></c:set>

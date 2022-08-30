@@ -185,4 +185,25 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where order_no = #{orderNo,jdbcType=BIGINT}
   </update>
+
+  <resultMap id="OrderVOMap" type="OrderVO">
+    <id column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="payment" jdbcType="DECIMAL" property="payment" />
+    <result column="postage" jdbcType="INTEGER" property="postage" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <collection property="list" ofType="OrderItem">
+      <result column="product_name" property="productName"/>
+      <result column="product_image" property="productImage"/>
+      <result column="current_unit_price"  property="currentUnitPrice" />
+      <result column="quantity"  property="quantity" />
+    </collection>
+  </resultMap>
+
+  <select id="selectByUserId" parameterType="Integer">
+    SELECT o.order_no,o.payment,o.status,o.create_time,oi.product_name,oi.product_image,oi.current_unit_price,oi.quantity
+    FROM `order` AS o INNER JOIN order_item AS oi
+    ON o.order_no=oi.order_no
+    WHERE o.user_id=#{id}
+  </select>
 </mapper>
