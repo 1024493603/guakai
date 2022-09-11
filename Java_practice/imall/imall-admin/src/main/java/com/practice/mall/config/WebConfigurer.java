@@ -1,6 +1,8 @@
 package com.practice.mall.config;
 
+import com.practice.mall.interceptor.LoginIntercepter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -32,13 +34,13 @@ public class WebConfigurer implements WebMvcConfigurer {
           </mvc:interceptor>
        </mvc:interceptors>*/
     // 这个方法用来注册拦截器，我们写的拦截器需要在这里配置才能生效
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginIntercepter())
-//                .addPathPatterns("/**")     //拦截全部
-//                .excludePathPatterns("/user/login", "/user/getLoginPage", "/auth/code", "/error", "/static/**");     //排除部分
-//
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginIntercepter())
+                .addPathPatterns("/**")     //拦截全部
+                .excludePathPatterns("/user/login", "/user/getLoginPage", "/auth/code", "/error", "/static/**");     //排除部分
 
-
+        String str = "123.123.123.123";
+        String[] strs = str.split(".");
+    }
 }

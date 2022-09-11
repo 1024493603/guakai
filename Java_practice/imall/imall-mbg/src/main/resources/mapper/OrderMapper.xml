@@ -200,7 +200,7 @@
     </collection>
   </resultMap>
 
-  <select id="selectByUserId" parameterType="Integer">
+  <select id="selectByUserId" parameterType="Integer" resultMap="OrderVOMap">
     SELECT o.order_no,o.payment,o.status,o.create_time,oi.product_name,oi.product_image,oi.current_unit_price,oi.quantity
     FROM `order` AS o INNER JOIN order_item AS oi
     ON o.order_no=oi.order_no

@@ -33,7 +33,7 @@
 						<td width="55%">
 							<c:forEach items="${orderVO.list}" var="orderItem">
 								<ul class="order_goods_list clearfix">
-									<li class="col01"><img src="${IMG_SERVER_QINIU} + ${orderItem.productImage}"></li>
+									<li class="col01"><img src="${IMG_SERVER_QINIU + orderItem.productImage}"></li>
 									<li class="col02">${orderItem.productName}<em>${orderItem.currentUnitPrice}元/500g</em></li>
 									<li class="col03">${orderItem.quantity}</li>
 									<li class="col04">${orderItem.currentUnitPrice*orderItem.quantity}元</li>

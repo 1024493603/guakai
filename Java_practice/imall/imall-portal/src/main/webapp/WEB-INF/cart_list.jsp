@@ -41,7 +41,7 @@
 				</div>
 			</li>
 			<li class="col07">25.80元</li>
-			<li class="col08"><a href="javascript:;">删除</a></li>
+			<li class="col08"><a href="javascript:deleteById(${cartVO.id})">删除</a></li>
 		</ul>
 	</c:forEach>
 
@@ -80,6 +80,26 @@
 						}
 					},
 					'json'
+			);
+		}
+
+		function deleteById(id) {
+			layer.confirm(
+				'您确定要删除吗？',
+				function () {
+					$.post(
+						'/cart/deleteById',
+						{'id' : id},
+						function (jsonResult) {
+							if(jsonResult.ok) {
+								mylayer.okMsg(jsonResult.msg);
+							} else {
+								mylayer.errorMsg(jsonResult.msg);
+							}
+						},
+						'json'
+					)
+				}
 			);
 		}
 	</script>
